@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Catalog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Product Catalog</h1>
+<div id="products" class="container"></div>
+
+<script>
+  fetch("/api/products")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("products");
+
+      data.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+          <img src="${product.image}" />
+          <h3>${product.name}</h3>
+          <p>Rs.${product.price}</p>
+        `;
+
+        container.appendChild(card);
+      });
+    })
+    .catch(err => console.log(err));
+</script>
+
+</body>
+</html>

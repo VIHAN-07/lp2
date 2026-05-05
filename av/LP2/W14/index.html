@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center; color: blue; border-style: solid;">Company Directory</h1>
+    <ul id="my_ul"></ul>
+    <script>
+        async function getData() {
+            
+            try{
+                const response = await fetch("http://localhost:3500/api/users");
+                if(!response.ok){
+                    throw new Error(`Server Error:${response.status}`);
+                }
+
+                const result = await response.json();
+                const ulist = document.getElementById("my_ul");
+                result.forEach(element => {
+                    const list=document.createElement("li");
+                    list.innerHTML = `<strong style="border-style: solid">${element.name}</strong> and ${element.role}`;
+                    ulist.appendChild(list);
+                });
+            }
+            catch(error){
+                console.error(error);
+            }
+            
+        }
+
+        getData();
+        // button.addEventListener("click",()=>{
+        //     fetch("http://localhost:3500/message")
+        //     .then(response=>{
+        //         if(!response.ok){
+        //             throw new Error(`server error:${response.status} ${response}`);
+        //         }
+        //         return response.json;
+        //     })
+        //     .then(data=>{
+        //         heading.textContent = data.message;
+        //     })
+        //     .catch(error=>{
+        //         console.error(error);
+        //     })
+        // })
+
+        // button.addEventListener('click', async ()=>{
+        //     try{
+        //         const response = await fetch("http://localhost:3500/message");
+
+        //         if(!response.ok){
+        //             throw new error(`Server error:${response.status}`)
+        //         }
+
+        //         const result = await response.json();
+
+        //         heading.textContent = result.message;
+
+        //     }catch(error){
+        //         console.error(error);
+        //     }
+        // });
+    </script>
+</body>
+</html>

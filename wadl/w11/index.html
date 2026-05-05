@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Auth System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container" style="margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; display: flex; flex-direction: row; gap: 300px; justify-content: center; align-items: flex-start;">
+    <div>
+    <h1>🔐 Registration</h1>
+
+    <form onsubmit="register(event)">
+      <input type="text" id="name" placeholder="Name" required><br>
+      <input type="email" id="email" placeholder="Email" required><br>
+      <input type="text" id="mobile" placeholder="Mobile" required><br>
+      <input type="date" id="dob" required><br>
+      <input type="text" id="city" placeholder="City" required><br>
+      <input type="text" id="address" placeholder="Address" required><br>
+      <input type="text" id="username" placeholder="Username" required><br>
+      <input type="password" id="password" placeholder="Password" required><br>
+      <button type="submit">Register</button>
+    </form>
+    </div>
+
+    <div>
+    <h1>Login</h1>
+
+    <form onsubmit="login(event)">
+      <input type="text" id="loginUser" placeholder="Username" required><br>
+      <input type="password" id="loginPass" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+    </div>
+  </div>
+
+  <script>
+
+    // -------- REGISTRATION --------
+    function register(e) {
+      e.preventDefault();
+
+      const user = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        mobile: document.getElementById("mobile").value,
+        dob: document.getElementById("dob").value,
+        city: document.getElementById("city").value,
+        address: document.getElementById("address").value,
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value
+      };
+
+      // VALIDATIONS
+      if (!/^[a-zA-Z ]+$/.test(user.name)) {
+        alert("Invalid Name");
+        return;
+      }
+
+      if (!/^\d{10}$/.test(user.mobile)) {
+        alert("Mobile must be 10 digits");
+        return;
+      }
+
+      if (user.password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return;
+      }
+
+      // Simulated AJAX POST
+      setTimeout(() => {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("Registered Successfully!");
+      }, 300);
+    }
+
+    // -------- LOGIN --------
+    function login(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("loginUser").value;
+      const password = document.getElementById("loginPass").value;
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      const found = users.find(u => u.username === username && u.password === password);
+
+      if (found) {
+        alert("Login Successful!");
+        window.location.href = "users.html";
+      } else {
+        alert("Invalid Credentials");
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

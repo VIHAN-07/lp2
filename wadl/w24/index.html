@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Reviews</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+  <!-- 🎨 CUSTOM STYLING -->
+  <style>
+    body {
+      background-color: #f5f7fa;
+    }
+
+    .ui-header {
+      background: #2c3e50 !important;
+      color: white !important;
+    }
+
+    .ui-btn {
+      background: #3498db !important;
+      color: white !important;
+    }
+
+    .movie-card {
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      /* box-shadow: 0 2px 5px rgba(0,0,0,0.2); */
+      margin-bottom: 15px;
+    }
+
+    img {
+      border-radius: 8px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<!-- HOME -->
+<div data-role="page" id="home">
+
+  <div data-role="header">
+    <h1>🎬 Movie Reviews</h1>
+  </div>
+
+  <div class="ui-content">
+
+    <a href="#movie1" class="ui-btn">Inception</a>
+    <a href="#movie2" class="ui-btn">Avengers</a>
+    <a href="#movie3" class="ui-btn">Interstellar</a>
+    <a href="#movie4" class="ui-btn">Joker</a>
+
+  </div>
+
+</div>
+
+---
+
+<!-- MOVIE 1 -->
+<div data-role="page" id="movie1">
+
+  <div data-role="header">
+    <h1>Inception</h1>
+  </div>
+
+  <div class="ui-content movie-card">
+
+    <img src="assets/movie1.jpg" width="100%">
+
+    <h3>Genre:</h3>
+    <p>Sci-Fi / Thriller</p>
+
+    <h3>Summary:</h3>
+    <p>A thief enters dreams to steal secrets.</p>
+
+    <h3>Review:</h3>
+    <p>Mind-bending masterpiece with stunning visuals and concept.</p>
+
+  </div>
+
+</div>
+
+---
+
+<!-- MOVIE 2 -->
+<div data-role="page" id="movie2">
+
+  <div data-role="header">
+    <h1>Avengers</h1>
+  </div>
+
+  <div class="ui-content movie-card">
+
+    <img src="assets/movie2.jpg" width="100%">
+
+    <h3>Genre:</h3>
+    <p>Action / Superhero</p>
+
+    <h3>Summary:</h3>
+    <p>Heroes unite to save the world.</p>
+
+    <h3>Review:</h3>
+    <p>Action-packed and entertaining blockbuster.</p>
+
+  </div>
+
+</div>
+
+---
+
+<!-- MOVIE 3 -->
+<div data-role="page" id="movie3">
+
+  <div data-role="header">
+    <h1>Interstellar</h1>
+  </div>
+
+  <div class="ui-content movie-card">
+
+    <img src="assets/movie3.jpg" width="100%">
+
+    <h3>Genre:</h3>
+    <p>Sci-Fi / Drama</p>
+
+    <h3>Summary:</h3>
+    <p>A journey through space to save humanity.</p>
+
+    <h3>Review:</h3>
+    <p>Emotional and scientifically rich cinematic experience.</p>
+
+  </div>
+
+</div>
+
+---
+
+<!-- MOVIE 4 -->
+<div data-role="page" id="movie4">
+
+  <div data-role="header">
+    <h1>Joker</h1>
+  </div>
+
+  <div class="ui-content movie-card">
+
+    <img src="assets/movie4.jpg" width="100%">
+
+    <h3>Genre:</h3>
+    <p>Drama / Crime</p>
+
+    <h3>Summary:</h3>
+    <p>The origin story of a troubled man.</p>
+
+    <h3>Review:</h3>
+    <p>Dark, powerful performance with deep storytelling.</p>
+
+  </div>
+
+</div>
+
+</body>
+</html>

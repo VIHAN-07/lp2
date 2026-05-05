@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="countDocument"></h1>
+    <table id="marks" border="1">
+        <tr>
+            <th>Name</th>
+            <th>RollNo</th>
+            <th>WAD</th>
+            <th>CC</th>
+            <th>DSBDA</th>
+            <th>CNS</th>
+            <th>AI</th>
+        </tr>
+    </table>
+    <form onsubmit="postData(event)" id="enterData">
+        <input type="text" id="Name" placeholder="Name"><br>
+        <input type="number" id="RollNo" min="1" max="999" placeholder="RollNo"><br>
+        <input type="number" id="WAD" min="0" max="50" placeholder="WAD Marks"><br>
+        <input type="number" id="CC" min="0" max="50" placeholder="CC Marks"><br>
+        <input type="number" id="DSBDA" min="0" max="50" placeholder="DSBDA Marks"><br>
+        <input type="number" id="CNS" min="0" max="50" placeholder="CNS Marks"><br>
+        <input type="number" id="AI" min="0" max="50" placeholder="AI Marks"><br>
+        <input type="submit">
+    </form>
+    <script>
+
+        async function postData(event){
+            event.preventDefault();
+            try{
+                const data = {
+                    Name:document.getElementById('Name').value,
+                    RollNo:document.getElementById('RollNo').value,
+                    WAD_Marks:document.getElementById('WAD').value,
+                    CC_Marks:document.getElementById('CC').value,
+                    DSBDA_Marks:document.getElementById('DSBDA').value,
+                    CNS_Marks:document.getElementById('CNS').value,
+                    AI_Marks:document.getElementById('AI').value,
+                }
+                const response = await fetch('http://localhost:3000/insertStudent',{
+                    method:"POST",
+                    headers:{'content-type':'application/json'},
+                    body: JSON.stringify(data)
+                });
+                console.log(await response.json());
+            }catch(err){
+                console.log(err);
+            }
+        }
+
+
+        getAllData();
+        async function getAllData(){
+            try{
+                const response = await fetch('/');
+                if(!response.ok){
+                    throw new Error(response.status);
+                }
+                const obj= await response.json();
+                
+                print(obj);
+            }
+            catch(err){
+                return err;
+            }
+        }
+
+        
+        function print(doc){
+            console.log("hehlo")
+            const tables = document.getElementById("marks");
+            doc.forEach(element=>{
+                const tablerow = document.createElement('tr');
+                tablerow.innerHTML = `
+                    <td>${element.Name}</td>
+                    <td>${element.RollNo}</td>
+                    <td>${element.WAD_Marks}</td>
+                    <td>${element.CC_Marks}</td>
+                    <td>${element.DSBDA_Marks}</td>
+                    <td>${element.CNS_Marks}</td>
+                    <td>${element.AI_Marks}</td>
+                `;
+                tables.appendChild(tablerow);
+            })
+        }
+
+    </script>
+</body>
+</html>

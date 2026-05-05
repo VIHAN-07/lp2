@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="addData(event);">
+        <input type="text" id="todo" placeholder="Task">
+        <input type="submit">
+    </form><br>
+    <hr>
+    <form onsubmit="deleteData(event)">
+        <input type="text" id="delete" placeholder="Task to delete">
+        <input type="submit">
+    </form><br>
+    <ul id="list">
+    </ul>
+    <script>
+        async function addData(event){
+            event.preventDefault();
+            try{
+                const data={
+                    todo:document.getElementById("todo").value
+                };
+                const res = await fetch('http://localhost:3500/add',{
+                    method:'POST',
+                    headers:{'content-type':'application/json'},
+                    body:JSON.stringify(data)
+                });
+                if(!res.ok){
+                    throw new Error("res is not ok");
+                }
+                console.log(await res.json());
+                await getdata();
+            }catch(err){
+                console.error(err);
+            }
+        }
+
+        async function deleteData(event){
+            event.preventDefault();
+            try{
+                const res = await fetch(`http://localhost:3500/delete/${encodeURIComponent(document.getElementById("delete").value)}`,{
+                    method:'DELETE'
+                });
+                if(!res.ok){
+                    throw new Error("res is not ok");
+                }
+                console.log(await res.json());
+                await getdata();
+            }catch(err){
+                console.error(err);
+            }
+        }
+
+        async function getdata(){
+            try{
+                const res = await fetch('http://localhost:3500/get');
+                if(!res.ok){
+                    throw new Error(res.status);
+                }
+                const data = await res.json();
+                console.log(data);
+                const list = document.getElementById("list");
+                
+                list.innerHTML = ``;
+                data.forEach(element=>{
+                    const innerList = document.createElement('li');
+                    innerList.innerHTML = `
+                        ${element.todo}
+                    `
+                    list.appendChild(innerList);
+                })
+
+            }catch(err){
+                console.log(err);
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Portfolio</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+  <style>
+    body {
+      background: #f4f6f9;
+    }
+
+    .ui-header {
+      background: #34495e !important;
+      color: white !important;
+    }
+
+    .ui-btn {
+      background: #2980b9 !important;
+      color: white !important;
+    }
+
+    .card {
+      background: white;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    img {
+      border-radius: 50%;
+      margin: 10px 0;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<!-- HOME -->
+<div data-role="page" id="home">
+
+  <div data-role="header">
+    <h1>My Portfolio</h1>
+  </div>
+
+  <div class="ui-content" style="text-align:center">
+
+    <img src="assets/profile.jpg" width="120">
+
+    <h2>Your Name</h2>
+    <p>IT Student | Developer</p>
+
+    <a href="#about" class="ui-btn">About Me</a>
+    <a href="#projects" class="ui-btn">Projects</a>
+    <a href="#skills" class="ui-btn">Skills</a>
+    <a href="#contact" class="ui-btn">Contact</a>
+
+  </div>
+
+</div>
+
+---
+
+<!-- ABOUT -->
+<div data-role="page" id="about">
+
+  <div data-role="header">
+    <h1>About Me</h1>
+  </div>
+
+  <div class="ui-content card">
+    <p>
+      I am an IT student passionate about web development,
+      AI, and building scalable applications.
+    </p>
+  </div>
+
+</div>
+
+---
+
+<!-- PROJECTS -->
+<div data-role="page" id="projects">
+
+  <div data-role="header">
+    <h1>Projects</h1>
+  </div>
+
+  <div class="ui-content">
+
+    <div class="card">
+      <h3>Sentiment Analysis App</h3>
+      <p>Analyzes user emotions using AI.</p>
+    </div>
+
+    <div class="card">
+      <h3>PetCare Platform</h3>
+      <p>Web app for pet services booking.</p>
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+<!-- SKILLS -->
+<div data-role="page" id="skills">
+
+  <div data-role="header">
+    <h1>Skills</h1>
+  </div>
+
+  <div class="ui-content">
+
+    <ul data-role="listview">
+      <li>HTML, CSS, JavaScript</li>
+      <li>React & Node.js</li>
+      <li>MongoDB</li>
+      <li>Python & AI/ML</li>
+    </ul>
+
+  </div>
+
+</div>
+
+---
+
+<!-- CONTACT -->
+<div data-role="page" id="contact">
+
+  <div data-role="header">
+    <h1>Contact</h1>
+  </div>
+
+  <div class="ui-content card">
+
+    <p><b>Email:</b> your@email.com</p>
+    <p><b>Phone:</b> +91-XXXXXXXXXX</p>
+    <p><b>Location:</b> Pune, India</p>
+
+  </div>
+
+</div>
+
+</body>
+</html>

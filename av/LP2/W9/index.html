@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="getData(event)">
+        <input type="text" id="city">
+        <input type="submit">
+    </form>
+    <div id="data"></div>
+    <script>
+        async function getData(event)  {
+            event.preventDefault();
+            
+            try{
+                const city = document.getElementById("city").value;
+                const responce  = await fetch(`/weather/${encodeURIComponent(city)}`);
+                if(!responce.ok){
+                    throw new Error(responce.statusText);
+                }
+                const obj = await responce.json();
+                const div = document.getElementById('data');
+                div.innerHTML= `
+                    City:${obj.city}<br>
+                    Temp:${obj.Temperature}<br>
+                    Humidity:${obj.Humidity}
+                `
+            }
+            catch(err){
+                console.err(err);
+            }
+        }
+    </script>
+</body>
+</html>

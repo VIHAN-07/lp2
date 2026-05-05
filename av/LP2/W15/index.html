@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center; color: rgb(0, 132, 0);">Welcome to Product Catalog</h1>
+    <button id="enter" style="background-color: rgb(117, 255, 117);">TO CATALOG</button>
+    <div id="product-catalog"></div>
+    <script>
+        const button = document.getElementById("enter");
+        button.addEventListener('click',()=>{
+            getProduct();
+        })
+
+        async function getProduct() {
+            document.getElementById("product-catalog").innerHTML = "";
+            try{
+                const response = await fetch("http://localhost:3300/products");
+                if(!response.ok){
+                    throw new Error(response.status);
+                }
+                const result = await response.json();
+                const output = document.getElementById("product-catalog");
+                result.forEach(element=>{
+                    const newdiv = document.createElement("div");
+                    newdiv.innerHTML=(`
+                        <div>
+                            <h4>${element.name}</h4>
+                            <img src="${element.image}" alt="${element.name}">
+                            <p>${element.price}</p>
+                        </div>
+                    `);
+                    output.appendChild(newdiv);
+                });
+                
+            }catch(error){
+            console.log(error);
+            }
+        }
+    </script>
+</body>
+</html>

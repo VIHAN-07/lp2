@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Registration Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+  <div class="card shadow p-4">
+    <h2 class="text-center mb-4">🎉 Event Registration</h2>
+
+    <form class="needs-validation" novalidate>
+
+      <!-- Name -->
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Name" required>
+        <label for="name">Full Name</label>
+        <div class="invalid-feedback">Please enter your name.</div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" placeholder="Email" required>
+        <label for="email">Email address</label>
+        <div class="invalid-feedback">Enter a valid email.</div>
+      </div>
+
+      <!-- Phone with Tooltip -->
+      <div class="form-floating mb-3">
+        <input type="tel" class="form-control" id="phone" placeholder="Phone"
+          data-bs-toggle="tooltip" title="Enter 10-digit mobile number" required>
+        <label for="phone">Phone Number</label>
+        <div class="invalid-feedback">Enter a valid phone number.</div>
+      </div>
+
+      <!-- Event Type -->
+      <div class="form-floating mb-3">
+        <select class="form-select" id="eventType" required>
+          <option value="">Choose...</option>
+          <option>Workshop</option>
+          <option>Seminar</option>
+          <option>Hackathon</option>
+        </select>
+        <label for="eventType">Select Event</label>
+        <div class="invalid-feedback">Please select an event.</div>
+      </div>
+
+      <!-- Date -->
+      <div class="form-floating mb-3">
+        <input type="date" class="form-control" id="date" required>
+        <label for="date">Event Date</label>
+        <div class="invalid-feedback">Select a date.</div>
+      </div>
+
+      <!-- Message -->
+      <div class="form-floating mb-3">
+        <textarea class="form-control" placeholder="Message" id="message" style="height: 100px"></textarea>
+        <label for="message">Additional Notes</label>
+      </div>
+
+      <!-- Terms -->
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="terms" required>
+        <label class="form-check-label" for="terms">
+          I agree to terms and conditions
+        </label>
+        <div class="invalid-feedback">You must agree before submitting.</div>
+      </div>
+
+      <!-- Submit -->
+      <button class="btn btn-primary w-100" type="submit">Register</button>
+
+    </form>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Enable Tooltips -->
+<script>
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+</script>
+
+<!-- Validation Script -->
+<script>
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
+
+</body>
+</html>

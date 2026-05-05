@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User List</title>
+</head>
+<body>
+
+<h2>User List</h2>
+<ul id="userList"></ul>
+
+<script>
+  fetch("/api/users")
+    .then(response => response.json())
+    .then(data => {
+      let list = document.getElementById("userList");
+
+      data.forEach(user => {
+        let li = document.createElement("li");
+        li.textContent = user.name + " - " + user.email;
+        list.appendChild(li);
+      });
+    })
+    .catch(err => console.log(err));
+</script>
+
+</body>
+</html>

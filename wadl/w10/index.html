@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>To-Do List</h1>
+
+<input type="text" id="taskInput" placeholder="Enter task">
+<button onclick="addTask()">Add</button>
+
+<ul id="list"></ul>
+
+<script>
+
+function loadTasks() {
+  fetch("/api/todos")
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+
+      data.forEach(todo => {
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+          <span class="${todo.completed ? 'done' : ''}">
+            ${todo.task}
+          </span>
+
+          <div class="actions">
+            <button onclick="completeTask(${todo.id})" style="margin-right: 5px; background-color: ${todo.completed ? 'orange' : 'green'}; color: white;">
+              ${todo.completed ? "Undo" : "Complete"}
+            </button>
+
+            <button 
+              onclick="updateTask(${todo.id}, '${todo.task}')"
+              style="margin-right: 5px; background-color: blue; color: white;"
+              ${todo.completed ? "disabled" : ""}>
+              Update
+            </button>
+
+            <button onclick="deleteTask(${todo.id})"
+              style="background-color: red; color: white;"
+              ${todo.completed ? "disabled" : ""}>
+              Delete
+            </button>
+          </div>
+        `;
+
+        list.appendChild(li);
+      });
+    });
+}
+
+// ADD TASK (with validation)
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const task = input.value.trim();
+
+  if (task === "") {
+    alert("Task cannot be empty!");
+    return;
+  }
+
+  fetch("/api/todos", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task, completed: false })
+  }).then(() => {
+    input.value = "";
+    loadTasks();
+  });
+}
+
+// DELETE
+function deleteTask(id) {
+  fetch(`/api/todos/${id}`, { method: "DELETE" })
+    .then(() => loadTasks());
+}
+
+// UPDATE (restore old if empty)
+function updateTask(id, oldTask) {
+  const newTask = prompt("Edit task:", oldTask);
+
+  if (newTask === null) return; // cancel pressed
+
+  const finalTask = newTask.trim() === "" ? oldTask : newTask;
+
+  fetch(`/api/todos/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: finalTask })
+  }).then(() => loadTasks());
+}
+
+// COMPLETE (toggle)
+function completeTask(id) {
+  fetch(`/api/todos/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ toggle: true })
+  }).then(() => loadTasks());
+}
+
+loadTasks();
+
+</script>
+
+</body>
+</html>

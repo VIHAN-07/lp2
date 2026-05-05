@@ -1,0 +1,19 @@
+body{
+    background-color: lightblue;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    text-align: center;
+    border-style: solid;
+    border-color: brown;
+    border-radius: 5px;
+    color: rgb(113, 68, 0) ;
+}
+.box{
+    text-align: center;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: black;
+    width: auto;
+    height: auto;
+}

@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>test</title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
+        <script src="/js/bootstrap.min.js"></script>
+    </head>
+    <a>
+        <header>
+            <h1>Welcome to the ABC site</h1>
+
+        </header>
+        <h1 id="my-heading">test</h1>
+        <p>test</p>
+        <a href="https://www.google.com/"  title="goes to google">google</a>
+        <br>
+        <a href="https://pict.edu/">
+        <img src="pict.jpeg" height="200" alt="pict logo">
+        </a>
+        <h1><div style="color: red;">this is span tag</div></h1>
+
+        <!-- unorder list -->
+        <ol>
+            <li class="Dairy">milK</li>
+                <ul>
+                    <li class="Dairy">cake</li>
+                    <li class="Dairy">cheese</li>
+                    <li class="Dairy">paneer</li>
+                </ul>
+            <li>egg</li>
+            <li>cheese</li>
+            <li>chicken</li>
+        </ol>
+
+        <h3>My table</h3>
+        <table border="4" style="background-color: yellow;">
+            <tr align="center">
+                <th>sunday</th>
+                <th>monday</th>
+                <th>tuesday</th>
+                <th>wednesday</th>
+                <th>thrusday</th>
+                <th>friday</th>
+                <th>saturday</th>
+            </tr>
+            <tr>
+                <td>closed</td>
+            </tr>
+        </table>
+
+        <button onclick="doSomething()" style="border-radius: 5px;">click me</button>
+
+        <p id="greeting">helloo</p>
+
+        <script>
+            const doc=document.getElementsByClassName("Dairy");
+            console.log(doc);
+            function doSomething(){
+                document.getElementById("greeting").innerHTML = "Good bye";
+            }
+        </script>
+
+        <div class="box">
+            box1
+        </div>
+        <div class="box">
+            box2
+        </div>
+        
+ 
+        <footer>
+            <hr>
+            author: advait varade<br>
+            &copy; copyright resreved<br>
+            <a href="mailto:advait.varade@gmail.com">advait.varade@gmail.com</a>
+        </footer>    
+</body>
+</html>  

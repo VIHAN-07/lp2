@@ -1,0 +1,6 @@
+[
+    {"id":1, "name":"Advait", "role":"SDE" },
+    {"id":2, "name":"Vihan", "role":"HR" },
+    {"id":3, "name":"Jyot", "role":"DA" },
+    {"id":3, "name":"Aditi", "role":"Ml" }
+]

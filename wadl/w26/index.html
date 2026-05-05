@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PICT Course Structure</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+  <style>
+    body {
+      background: #eef2f7;
+    }
+
+    .ui-header {
+      background: #2c3e50 !important;
+      color: white !important;
+    }
+
+    .ui-content {
+      padding: 15px;
+    }
+
+    .subject {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+  </style>
+
+</head>
+
+<body>
+
+<!-- HOME PAGE -->
+<div data-role="page" id="home">
+
+  <div data-role="header">
+    <h1>PICT B.E. Course</h1>
+  </div>
+
+  <div class="ui-content">
+
+    <!-- FE -->
+    <div data-role="collapsible">
+      <h3>First Year (FE)</h3>
+
+      <div class="subject">
+        <b>Engineering Mathematics</b>
+        <p>Basic mathematics for engineering applications.</p>
+      </div>
+
+      <div class="subject">
+        <b>Physics</b>
+        <p>Fundamentals of mechanics and waves.</p>
+      </div>
+
+      <div class="subject">
+        <b>Basic Electrical Engineering</b>
+        <p>Introduction to circuits and electrical systems.</p>
+      </div>
+
+    </div>
+
+    <!-- SE -->
+    <div data-role="collapsible">
+      <h3>Second Year (SE)</h3>
+
+      <div class="subject">
+        <b>Data Structures</b>
+        <p>Efficient data organization techniques.</p>
+      </div>
+
+      <div class="subject">
+        <b>Computer Organization</b>
+        <p>Understanding computer architecture.</p>
+      </div>
+
+      <div class="subject">
+        <b>Discrete Mathematics</b>
+        <p>Mathematical foundations for CS.</p>
+      </div>
+
+    </div>
+
+    <!-- TE -->
+    <div data-role="collapsible">
+      <h3>Third Year (TE)</h3>
+
+      <div class="subject">
+        <b>Operating Systems</b>
+        <p>Process management and memory handling.</p>
+      </div>
+
+      <div class="subject">
+        <b>Database Management</b>
+        <p>Design and query databases.</p>
+      </div>
+
+      <div class="subject">
+        <b>Computer Networks</b>
+        <p>Communication between systems.</p>
+      </div>
+
+    </div>
+
+    <!-- BE -->
+    <div data-role="collapsible">
+      <h3>Final Year (BE)</h3>
+
+      <div class="subject">
+        <b>Machine Learning</b>
+        <p>Building intelligent systems.</p>
+      </div>
+
+      <div class="subject">
+        <b>Cloud Computing</b>
+        <p>Scalable computing over internet.</p>
+      </div>
+
+      <div class="subject">
+        <b>Project Work</b>
+        <p>Capstone engineering project.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

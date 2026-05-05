@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>🌤 Weather App</h1>
+    <div>
+        <input type = "text" id="city" placeholder="Enter City Name">
+        <button onclick="getWeather()">Get Weather</button>
+
+    </div>
+    <div id="result"></div>
+
+    <script>
+        function getWeather(){
+            const cityInput = document.getElementById('city').value.trim().toLowerCase();
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "weather.json", true);
+
+            xhr.onload = function(){
+                if(xhr.status === 200){
+                    const data = JSON.parse(xhr.responseText);
+                    const resultDiv = document.getElementById('result');
+                    if(data[cityInput]){
+                        const weather = data[cityInput];
+                        resultDiv.innerHTML = `
+                            <h2>${cityInput}</h2>
+                            <p>Temperature: ${weather.temperature}°C</p>
+                            <p>Humidity: ${weather.humidity}%</p>
+                            <p>Conditions: ${weather.conditions}</p>
+                        `;
+                    } else {
+                        resultDiv.innerHTML = `<p>City not found.</p>`;
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

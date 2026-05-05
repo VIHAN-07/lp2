@@ -1,0 +1,81 @@
+Yes — it will run on Ubuntu (Linux) 👍
+const fs = require('fs') is a built-in Node.js module, so it works the same on:
+
+Windows ✅
+Linux (Ubuntu) ✅
+macOS ✅
+🧠 But there are a few important differences you should NOT ignore
+1. 📁 File Paths (MOST COMMON ISSUE)
+
+Windows:
+
+const data = fs.readFileSync("data\\users.txt");
+
+👉 This can break on Linux ❌
+
+✅ Fix (use this everywhere):
+const path = require('path');
+
+const filePath = path.join(__dirname, 'data', 'users.txt');
+const data = fs.readFileSync(filePath);
+
+✔ Works on ALL OS
+✔ Automatically handles / and \
+
+2. 🔐 Case Sensitivity (VERY IMPORTANT)
+
+Windows:
+
+fs.readFileSync("Users.txt");
+
+Linux:
+
+fs.readFileSync("users.txt");
+
+👉 These are different files in Linux ❗
+
+So:
+
+Users.txt ≠ users.txt
+Your code may work in Windows but fail in Ubuntu
+3. 📄 Permissions
+
+Linux is stricter.
+
+If file has no permission:
+
+EACCES: permission denied
+Fix:
+chmod 644 users.txt
+4. 🧾 Line Endings (minor issue)
+Windows → \r\n
+Linux → \n
+
+Usually Node handles this fine, but string comparisons can sometimes act weird.
+
+5. 🟢 Example (Best Practice for your project)
+
+If you want to store users in a file instead of array:
+
+const fs = require('fs');
+const path = require('path');
+
+const filePath = path.join(__dirname, 'users.json');
+
+// Read
+function readUsers() {
+    if (!fs.existsSync(filePath)) return [];
+    return JSON.parse(fs.readFileSync(filePath));
+}
+
+// Write
+function saveUsers(users) {
+    fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
+}
+✅ Final Answer
+fs works perfectly on Ubuntu ✔️
+Your code will run ✔️
+Just fix:
+Paths → use path.join()
+File names → match case exactly
+Permissions → if error comes

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="count"></h1>
+    
+    <table border="1" id="musictable">
+        <tr>
+            <th>Song Name</th>
+            <th>Film Name</th>
+            <th>Music Director</th>
+            <th>Singer</th>
+            <th>Actor</th>
+            <th>Actress</th>
+        </tr>
+    </table>
+    <form onsubmit="listSong(event)">
+        <input type="text" id="singer" placeholder="singer">
+        <input type="submit">
+    </form>
+    <hr>
+    <form onsubmit="sendData(event)">
+        <input type="text" id="song" placeholder="song"><br>
+        <input type="text" id="film" placeholder="film"><br>
+        <input type="text" id="musicdirector" placeholder="director"><br>
+        <input type="text" id="singer2" placeholder="singer"><br>
+        <input type="text" id="Actor" placeholder="actor"><br>
+        <input type="text" id="Actress" placeholder="Actress"><br>
+        <input type="submit">
+    </form>
+    <script>
+        countSongs()
+
+        async function countSongs(){
+            try{
+                const res = await fetch('/api/songCount');
+                if(!res.ok){
+                    throw new Error(res.status);
+                }
+                result = await res.json();
+                const count=document.getElementById('count');
+                count.innerHTML = `Mongo has document count:${result.count}`;
+            }catch(err){
+            console.log(err);
+            }
+        }
+
+        //listSong();
+
+        async function listSong(event){
+            event.preventDefault();
+            try{
+                const singer = document.getElementById("singer");
+                const response = await fetch(`http://localhost:3500/director/${encodeURIComponent(singer.value)}`);
+                if(!response.ok){
+                    throw new Error(response.status);
+                }
+                const result = await response.json();
+                console.log(result);
+                const tables = document.getElementById('musictable');
+                result.forEach(element=>{
+                    const t = document.createElement("tr");
+                    t.innerHTML = `
+                        <td>${element.Songname}</td>
+                        <td>${element.Film}</td>
+                        <td>${element.Music_director}</td>
+                        <td>${element.singer}</td>
+                        <td>${element.Actor}</td>
+                        <td>${element.Actress}</td>
+                    `
+                    tables.appendChild(t);
+                })
+            }catch(err){
+                console.log(err);
+            }
+        }
+
+        async function sendData(event){
+            event.preventDefault();
+            try{
+                let data = {
+                    Songname:document.getElementById('song').value,
+                    Film:document.getElementById('film').value,
+                    Music_director:document.getElementById('musicdirector').value,
+                    singer:document.getElementById('singer2').value,
+                    Actor:document.getElementById('Actor').value,
+                    Actress:document.getElementById('Actress').value
+                }
+                const response = await fetch('http://localhost:3500/addSong' , {
+                    method:'POST',
+                    headers: {'content-type':'application/json'},
+                    body: JSON.stringify(data)
+                })
+                const result=await response.json();
+                console.log(result);
+            }catch(err){
+                console.log(err);
+            }
+        }
+    </script>
+</body>
+</html>

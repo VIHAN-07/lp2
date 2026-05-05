@@ -1,0 +1,6 @@
+[
+    {"city":"Pune","Temperature":34,"Humidity":25},
+    {"city":"Mumbai","Temperature":39,"Humidity":80},
+    {"city":"Nashik","Temperature":36,"Humidity":18},
+    {"city":"Chiplun","Temperature":41,"Humidity":65}
+]

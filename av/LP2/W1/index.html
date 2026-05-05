@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #333;
+      color: white;
+    }
+
+    img {
+      width: 80px;
+      height: auto;
+    }
+
+    .pagination {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .pagination button {
+      padding: 8px 12px;
+      margin: 5px;
+      border: none;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+
+    .pagination button.active {
+      background-color: #007bff;
+    }
+
+    .pagination button:hover {
+      background-color: #555;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        display: none;
+      }
+
+      td {
+        text-align: left;
+        padding: 10px;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Product Catalog</h1>
+
+<table id="productTable">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Image</th>
+      <th>Price (₹)</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<div class="pagination" id="pagination"></div>
+
+<script>
+  const products = [
+    {
+      name: "Wireless Headphones",
+      image: "https://via.placeholder.com/80",
+      price: "₹7,999",
+      desc: "Noise-cancelling over-ear headphones."
+    },
+    {
+      name: "Smartwatch",
+      image: "https://via.placeholder.com/80",
+      price: "₹12,999",
+      desc: "Fitness tracking smartwatch."
+    },
+    {
+      name: "Gaming Mouse",
+      image: "https://via.placeholder.com/80",
+      price: "₹2,499",
+      desc: "Ergonomic gaming mouse."
+    },
+    {
+      name: "Laptop Stand",
+      image: "https://via.placeholder.com/80",
+      price: "₹1,999",
+      desc: "Adjustable aluminium stand."
+    }
+  ];
+
+  // Duplicate to test pagination (>10 items)
+  for (let i = 0; i < 10; i++) {
+    products.push({
+      name: "Extra Product " + (i + 1),
+      image: "https://via.placeholder.com/80",
+      price: "₹" + (1000 + i * 100),
+      desc: "Sample product description."
+    });
+  }
+
+  const rowsPerPage = 10;
+  let currentPage = 1;
+
+  function displayProducts(page) {
+    const tableBody = document.querySelector("#productTable tbody");
+    tableBody.innerHTML = "";
+
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const paginatedItems = products.slice(start, end);
+
+    paginatedItems.forEach(p => {
+      const row = `
+        <tr>
+          <td data-label="Product">${p.name}</td>
+          <td data-label="Image"><img src="${p.image}" /></td>
+          <td data-label="Price">${p.price}</td>
+          <td data-label="Description">${p.desc}</td>
+        </tr>
+      `;
+      tableBody.innerHTML += row;
+    });
+  }
+
+  function setupPagination() {
+    const pageCount = Math.ceil(products.length / rowsPerPage);
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+
+    for (let i = 1; i <= pageCount; i++) {
+      const btn = document.createElement("button");
+      btn.innerText = i;
+
+      if (i === currentPage) btn.classList.add("active");
+
+      btn.addEventListener("click", () => {
+        currentPage = i;
+        displayProducts(currentPage);
+        setupPagination();
+      });
+
+      pagination.appendChild(btn);
+    }
+  }
+
+  displayProducts(currentPage);
+  setupPagination();
+</script>
+
+</body>
+</html>
