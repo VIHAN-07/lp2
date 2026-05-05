@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Directory</title>
+</head>
+<body>
+
+<h2>Employee Directory</h2>
+
+<button onclick="getEmployees()">Load Employees</button>
+
+<div id="output"></div>
+
+<script>
+function getEmployees() {
+
+  fetch("http://localhost:3000/api")
+    .then(res => {
+      if (!res.ok) throw new Error("Server error");
+      return res.json();
+    })
+    .then(data => {
+
+      let output = "";
+
+      data.forEach(emp => {
+        output += `
+          <div>
+            <img src="${emp.image}" width="100">
+            <h3>${emp.name}</h3>
+            <p>Designation: ${emp.designation}</p>
+            <p>Department: ${emp.department}</p>
+            <p>Salary: ₹${emp.salary}</p>
+          </div>
+        `;
+      });
+
+      document.getElementById("output").innerHTML = output;
+    })
+    .catch(err => {
+      document.getElementById("output").innerHTML =
+        "Error loading data: " + err.message;
+    });
+
+}
+</script>
+
+</body>
+</html>

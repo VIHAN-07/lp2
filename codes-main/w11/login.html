@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5 col-md-5">
+    <h3 class="text-center">Login</h3>
+    <input id="ln" class="form-control mb-2" placeholder="Name or Email">
+    <input id="lp" type="password" class="form-control mb-2" placeholder="Password">
+    <button class="btn btn-success w-100" onclick="log()">Login</button>
+    <a href="register.html" class="btn btn-link w-100 mt-2">Create Account</a>
+  </div>
+
+  <script>
+    const get = () => JSON.parse(localStorage.getItem("u") || "[]");
+
+    function log() {
+      const users    = get();
+      const username = ln.value.trim();
+      const password = lp.value.trim();
+
+      // AJAX using XMLHttpRequest via Blob URL
+      const blob = new Blob([JSON.stringify(users)], { type: "application/json" });
+      const url  = URL.createObjectURL(blob);
+      const xhr  = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+      xhr.onload = function () {
+        URL.revokeObjectURL(url);
+        const data = JSON.parse(xhr.responseText);
+        const ok   = data.find(x =>
+          (x.n === username || x.e === username) && x.p === password
+        );
+        if (ok) {
+          alert("Login Success");
+          window.location.href = "users.html";
+        } else {
+          alert("Invalid Login");
+        }
+      };
+      xhr.send();
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+<div class="box wide" *ngIf="current">
+  <h2>Welcome, {{ current.name }}</h2>
+  <button class="logout" (click)="logout()">Logout</button>
+
+  <h3>All Users</h3>
+  <ul>
+    <li *ngFor="let u of users; let i = index">
+      <span><b>{{ u.name }}</b> | {{ u.email }} | {{ u.mobile }}</span>
+      <button (click)="delete(i)">Delete</button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5 col-md-5">
+    <h3 class="text-center">Register</h3>
+    <input id="n" class="form-control mb-2" placeholder="Name">
+    <input id="e" class="form-control mb-2" placeholder="Email">
+    <input id="m" class="form-control mb-2" placeholder="Mobile">
+    <input id="d" type="date" class="form-control mb-2">
+    <input id="c" class="form-control mb-2" placeholder="City">
+    <input id="a" class="form-control mb-2" placeholder="Address">
+    <input id="p" type="password" class="form-control mb-2" placeholder="Password">
+    <button class="btn btn-primary w-100" onclick="reg()">Register</button>
+    <a href="login.html" class="btn btn-link w-100 mt-2">Go to Login</a>
+  </div>
+
+  <script>
+    const get = () => JSON.parse(localStorage.getItem("u") || "[]");
+    const set = u => localStorage.setItem("u", JSON.stringify(u));
+
+    function reg() {
+      const user = {
+        n: n.value.trim(), e: e.value.trim(),
+        m: m.value.trim(), d: d.value,
+        c: c.value.trim(), a: a.value.trim(),
+        p: p.value
+      };
+
+      if (user.n.length < 3)          return alert("Name min 3 chars");
+      if (!user.e.includes("@"))      return alert("Invalid email");
+      if (!/^[0-9]{10}$/.test(user.m)) return alert("Mobile must be 10 digits");
+      if (user.p.length < 6)          return alert("Password min 6 chars");
+
+      const users = get();
+      users.push(user);
+
+      // AJAX using XMLHttpRequest via Blob URL
+      const blob = new Blob([JSON.stringify(users)], { type: "application/json" });
+      const url  = URL.createObjectURL(blob);
+      const xhr  = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+      xhr.onload = function () {
+        URL.revokeObjectURL(url);
+        set(JSON.parse(xhr.responseText));
+        alert("Registered!");
+        window.location.href = "login.html";
+      };
+      xhr.send();
+    }
+  </script>
+
+</body>
+</html>

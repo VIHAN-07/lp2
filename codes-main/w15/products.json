@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Laptop",
+    "price": 55000,
+    "image": "https://via.placeholder.com/150"
+  },
+  {
+    "name": "Mobile",
+    "price": 20000,
+    "image": "https://via.placeholder.com/150"
+  },
+  {
+    "name": "Headphones",
+    "price": 2000,
+    "image": "https://via.placeholder.com/150"
+  }
+]

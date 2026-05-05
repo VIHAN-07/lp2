@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User List</title>
+</head>
+<body>
+
+<h2>User List</h2>
+
+<button onclick="getUsers()">Load Users</button>
+
+<div id="output"></div>
+
+<script>
+function getUsers() {
+
+  fetch("http://localhost:3000/api")   <!-- FIX HERE -->
+    .then(res => {
+      if (!res.ok) throw new Error("Server error");
+      return res.json();
+    })
+    .then(data => {
+
+      let output = "";
+
+      data.forEach(item => {
+        output += `
+          <div>
+            <h3>${item.name}</h3>
+            <p>${item.email}</p>
+          </div>
+        `;
+      });
+
+      document.getElementById("output").innerHTML = output;
+    })
+    .catch(err => {
+      document.getElementById("output").innerHTML =
+        "Error loading data: " + err.message;
+    });
+
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<div class="box">
+  <h2>Login</h2>
+  <input [(ngModel)]="username" placeholder="Name or Email">
+  <input [(ngModel)]="password" type="password" placeholder="Password">
+  <p class="error">{{ error }}</p>
+  <button (click)="login()">Login</button>
+  <a routerLink="/">No account? Register</a>
+</div>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+
+<style>
+body{
+  font-family: Arial;
+  text-align:center;
+  margin:0;
+}
+
+header{
+  padding:15px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+/* Navbar */
+nav{
+  border:2px solid #333;
+  padding:10px;
+  margin:10px auto;
+  width:fit-content;
+  border-radius:8px;
+  background:#f8f8f8;
+}
+
+nav a{
+  text-decoration:none;
+  margin:0 10px;
+  color:#333;
+  font-weight:bold;
+}
+
+/* IMAGE BOX */
+.img-box{
+  width:200px;
+  height:200px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:10px;
+  border-radius:8px;
+  border:2px solid #ddd;
+  overflow:hidden;
+  background:#fff;
+}
+
+.img-box img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;   /* FULL IMAGE, NO CUT */
+}
+</style>
+</head>
+
+<body>
+
+<header>Welcome to Restaurant / Art Gallery</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact Us</a>
+</nav>
+
+<h3>Food Items</h3>
+
+<div class="img-box">
+  <img src="inception.jpeg">
+</div>
+
+<div class="img-box">
+  <img src="inception.jpeg">
+</div>
+
+<div class="img-box">
+  <img src="inception.jpeg">
+</div>
+
+</body>
+</html>

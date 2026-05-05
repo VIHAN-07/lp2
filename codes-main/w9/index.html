@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather App</title>
+  <style>
+    body { font-family: Arial; background: #f0f4ff; display: flex; justify-content: center; padding: 40px; }
+    .box { background: white; padding: 24px; border-radius: 8px; width: 320px; }
+    input, button { width: 100%; padding: 8px; margin-top: 8px; }
+    #result { margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Weather App</h2>
+    <input id="city" placeholder="Enter city (pune, mumbai...)">
+    <button onclick="search()">Search</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    // Weather data (acts as local JSON repository)
+    const jsonData = JSON.stringify({
+      pune:   { temp: 29, humidity: 60, condition: "Sunny" },
+      mumbai: { temp: 31, humidity: 75, condition: "Humid" },
+      delhi:  { temp: 35, humidity: 40, condition: "Hot"   },
+      nagpur: { temp: 33, humidity: 45, condition: "Dry"   }
+    });
+
+    function search() {
+      const city   = document.getElementById("city").value.trim().toLowerCase();
+      const result = document.getElementById("result");
+      if (!city) return;
+
+      result.textContent = "Loading...";
+
+      // AJAX using XMLHttpRequest on a Blob URL (works without a server)
+      const blob = new Blob([jsonData], { type: "application/json" });
+      const url  = URL.createObjectURL(blob);
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+
+      xhr.onload = function () {
+        URL.revokeObjectURL(url);
+        const data = JSON.parse(xhr.responseText);
+        const info = data[city];
+        if (!info) {
+          result.textContent = "City not found.";
+          return;
+        }
+        result.innerHTML = `
+          <p><b>${city.toUpperCase()}</b></p>
+          <p>Temperature: ${info.temp}°C</p>
+          <p>Humidity: ${info.humidity}%</p>
+          <p>Condition: ${info.condition}</p>
+        `;
+      };
+
+      xhr.onerror = function () {
+        result.textContent = "Error loading data.";
+      };
+
+      xhr.send();
+    }
+  </script>
+
+</body>
+</html>

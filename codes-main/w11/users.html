@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Users</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5 col-md-6">
+    <h3 class="text-center">Users List</h3>
+    <ul id="list" class="list-group"></ul>
+  </div>
+
+  <script>
+    const get = () => JSON.parse(localStorage.getItem("u") || "[]");
+    const set = u => localStorage.setItem("u", JSON.stringify(u));
+
+    function show() {
+      const users = get();
+
+      // AJAX using XMLHttpRequest via Blob URL
+      const blob = new Blob([JSON.stringify(users)], { type: "application/json" });
+      const url  = URL.createObjectURL(blob);
+      const xhr  = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+      xhr.onload = function () {
+        URL.revokeObjectURL(url);
+        const data = JSON.parse(xhr.responseText);
+        list.innerHTML = data.map((x, i) => `
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span><b>${x.n}</b> | ${x.e} | ${x.m}</span>
+            <button class="btn btn-danger btn-sm" onclick="del(${i})">Delete</button>
+          </li>`).join("");
+      };
+      xhr.send();
+    }
+
+    function del(i) {
+      const users = get();
+      users.splice(i, 1);
+      set(users);
+      show();
+    }
+
+    show();
+  </script>
+
+</body>
+</html>

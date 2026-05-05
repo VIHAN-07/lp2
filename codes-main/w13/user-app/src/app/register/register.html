@@ -1,0 +1,13 @@
+<div class="box">
+  <h2>Register</h2>
+  <input [(ngModel)]="name"     placeholder="Name">
+  <input [(ngModel)]="email"    placeholder="Email">
+  <input [(ngModel)]="mobile"   placeholder="Mobile">
+  <input [(ngModel)]="dob"      type="date">
+  <input [(ngModel)]="city"     placeholder="City">
+  <input [(ngModel)]="address"  placeholder="Address">
+  <input [(ngModel)]="password" type="password" placeholder="Password">
+  <p class="error">{{ error }}</p>
+  <button (click)="register()">Register</button>
+  <a routerLink="/login">Already have an account? Login</a>
+</div>
